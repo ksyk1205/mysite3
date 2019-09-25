@@ -12,9 +12,7 @@ public class UserService {
 	private UserDao userDao;
 
 	public void join(UserVo vo) {
-			userDao.insert(vo);
-
-		
+			userDao.insert(vo);	
 	}
 
 	public UserVo getUser(UserVo vo) {

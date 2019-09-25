@@ -13,8 +13,8 @@ import kr.co.itcen.mysite.vo.BoardVo;
 
 
 
-
 public class BoardDao {
+	
 	//글 쓰기를 위한 insert
 	public Boolean insert(BoardVo vo) {
 		Boolean result = false;
