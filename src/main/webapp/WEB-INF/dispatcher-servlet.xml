@@ -31,5 +31,5 @@
 
 	<context:annotation-config />
 	<context:component-scan
-		base-package="kr.co.itcen.mysite.controller" />
+		base-package="kr.co.itcen.mysite.controller,kr.co.itcen.mysite.exception" />
 </beans> 

@@ -8,11 +8,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.springframework.stereotype.Repository;
+
+import kr.co.itcen.mysite.exception.UserDaoException;
 import kr.co.itcen.mysite.vo.UserVo;
 
 @Repository
 public class UserDao {
-	private Connection getConnection() throws SQLException {
+	private Connection getConnection() throws SQLException { //예외처리  회피
 		Connection connection = null;
 
 		try {
@@ -27,8 +29,24 @@ public class UserDao {
 
 		return connection;
 	}
+	
+	//UserService에서
+	public UserVo get(UserVo vo) {
+		return get(vo.getEmail(),vo.getPassword());
+	}
+	//UserService에서
+	public void update(UserVo vo) {
+		if(vo.getPassword().equals("")) {
+		update(vo.getNo(),vo.getName(),vo.getGender());
+		}else {
+		p_update(vo.getNo(),vo.getName(),vo.getPassword(),vo.getGender());
+		}
+		
+	}
+	
+	
 	//join을 하기위한 insert
-	public Boolean insert(UserVo vo) {
+	public Boolean insert(UserVo vo) throws UserDaoException { 
 		Boolean result = false;
 
 		Connection connection = null;
@@ -40,7 +58,7 @@ public class UserDao {
 		try {
 			connection = getConnection();
 
-			String sql = "insert into user values(null, ?, ?, ?, ?,now())";
+			String sql = "inser into user values(null, ?, ?, ?, ?,now())";
 			pstmt = connection.prepareStatement(sql);
 			pstmt.setString(1, vo.getName());
 			pstmt.setString(2, vo.getEmail());
@@ -59,7 +77,7 @@ public class UserDao {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("error:" + e);
+			throw new UserDaoException(e.getMessage());  //예외 전환
 		} finally {
 			try {
 				if(rs != null) {
@@ -83,19 +101,8 @@ public class UserDao {
 
 		return result;		
 	}
-	//UserService
-	public UserVo get(UserVo vo) {
-		return get(vo.getEmail(),vo.getPassword());
-	}
-	//UserService
-	public void update(UserVo vo) {
-		if(vo.getPassword().equals("")) {
-		update(vo.getNo(),vo.getName(),vo.getGender());
-		}else {
-		p_update(vo.getNo(),vo.getName(),vo.getPassword(),vo.getGender());
-		}
-		
-	}
+
+	//회원정보 수정을 위한 get
 	public UserVo get(Long no) {
 		UserVo result = null;
 
