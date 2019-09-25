@@ -11,7 +11,7 @@
 		]]>	
 	</insert>
 	
-	<select id="getByEmailAndPassword1" parameterType='uservo' resultType="userVo">	
+	<select id="getByEmailAndPassword1" parameterType='uservo' resultType="uservo">	
 	<![CDATA[
 	select no, name
 	from user 
@@ -20,7 +20,7 @@
 	</select>
 	
 		
-	<select id="getByEmailAndPassword2" parameterType='map' resultType="userVo">	
+	<select id="getByEmailAndPassword2" parameterType='map' resultType="uservo">	
 	<![CDATA[
 	select no, name
 	from user 
