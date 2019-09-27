@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
-import kr.co.itcen.mysite.service.guestbookService;
+import kr.co.itcen.mysite.service.GuestbookService;
 import kr.co.itcen.mysite.vo.GuestbookVo;
 
 
@@ -20,7 +20,7 @@ import kr.co.itcen.mysite.vo.GuestbookVo;
 @RequestMapping("/guestbook")
 public class GuestbookController {
 	@Autowired
-	private guestbookService guestbookService;
+	private GuestbookService guestbookService;
 	
 	@RequestMapping("")
 	public String index(Model model) {

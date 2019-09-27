@@ -10,7 +10,7 @@ import kr.co.itcen.mysite.vo.GuestbookVo;
 
 
 @Service
-public class guestbookService {
+public class GuestbookService {
 	@Autowired
 	private GuestbookDao guestbookDao;
 
